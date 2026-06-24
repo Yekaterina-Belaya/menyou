@@ -16,6 +16,14 @@
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
+      "i18n": {
+        "sourceLocale": "en",
+        "locales": {
+          "ru": {
+            "translation": "src/locale/messages.ru.xlf"
+          }
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular/build:application",
@@ -29,9 +37,8 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "src/styles.scss"
-            ]
+            "styles": ["src/styles.scss"],
+            "polyfills": ["@angular/localize/init"]
           },
           "configurations": {
             "production": {
@@ -53,6 +60,16 @@
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
+            },
+            "ru": {
+              "localize": ["ru"],
+              "outputPath": "dist/menyou-app/ru/",
+              "polyfills": ["zone.js", "@angular/localize/init"]
+            },
+            "en": {
+              "localize": ["en"],
+              "outputPath": "dist/menyou-app/en/",
+              "polyfills": ["zone.js", "@angular/localize/init"]
             }
           },
           "defaultConfiguration": "production"
@@ -65,6 +82,12 @@
             },
             "development": {
               "buildTarget": "menyou-app:build:development"
+            },
+            "ru": {
+              "buildTarget": "menyou-app:build:ru"
+            },
+            "en": {
+              "buildTarget": "menyou-app:build:en"
             }
           },
           "defaultConfiguration": "development"
