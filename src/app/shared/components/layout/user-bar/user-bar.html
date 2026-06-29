@@ -1,0 +1,11 @@
+<div class="user-profile">
+  <img
+    [src]="userAvatar || 'assets/images/default-avatar.png'"
+    alt="User Avatar"
+    class="user-avatar"
+  />
+  <div class="user-info">
+    <span class="user-name">{{ userName || 'Гость' }}</span>
+    <span class="user-status">В сети</span>
+  </div>
+</div>

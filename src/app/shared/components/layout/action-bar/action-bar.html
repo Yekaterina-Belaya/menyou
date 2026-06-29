@@ -1,0 +1,14 @@
+<div class="action-buttons">
+  <button mat-icon-button aria-label="Поиск">
+    <mat-icon>search</mat-icon>
+  </button>
+  <a routerLink="/favorites" mat-icon-button aria-label="Избранное">
+    <mat-icon>favorite_border</mat-icon>
+  </a>
+  <button mat-icon-button aria-label="Уведомления" class="notification-btn">
+    <mat-icon>notifications_none</mat-icon>
+    @if (unreadCount > 0) {
+      <span class="notification-badge">{{ unreadCount }}</span>
+    }
+  </button>
+</div>

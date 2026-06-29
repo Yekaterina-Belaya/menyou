@@ -1,11 +1,10 @@
 @use '@angular/material' as mat;
-@use 'styles/themes/variables' as vars;
+@use '../src/styles/themes/theme' as theme;
 
 // Подключение темы Material
 @include mat.core();
+@include theme.create-application-theme();
 
-// Применяем тему ко всему приложению
-@include mat.all-component-themes(vars.$light-theme);
 
 html {
   height: 100%;

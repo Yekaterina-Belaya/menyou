@@ -1,0 +1,44 @@
+@use '@angular/material' as mat;
+
+@mixin create-application-theme() {
+  @include mat.core();
+
+  $my-custom-theme: mat.define-theme((
+    color: (
+      theme-type: light,
+      primary: mat.$green-palette,
+      tertiary: mat.$orange-palette,
+    ),
+    typography: (
+      brand-family: 'Roboto, sans-serif',
+      plain-family: 'Roboto, sans-serif',
+    )
+  ));
+
+  // 1. Применяем стандартную тему на html
+  html {
+    @include mat.theme($my-custom-theme);
+  }
+
+  // 2. Используем более сильный селектор :root для ваших кастомных цветов,
+  // чтобы они гарантированно перекрыли стандартные значения.
+  html:root {
+    --mat-sys-primary: #00DA86 !important;
+    --mat-sys-secondary: #00C8B3 !important;
+    --mat-sys-tertiary: #FFA440 !important;
+
+    // Кастомный фон и поверхности
+    --mat-sys-background: #E0FCF3 !important;
+    --mat-sys-surface: #FFFFFF !important;
+
+    // Цвета текста
+    --mat-sys-on-background: #000000 !important;
+    --mat-sys-on-surface: #000000 !important;
+    --mat-sys-on-surface-variant: #D9D9D9 !important;
+
+    // Ваши дополнительные переменные для проекта
+    --app-color-links: #009B8B;
+    --app-color-white: #FFFFFF;
+    --app-color-black: #000000;
+  }
+}

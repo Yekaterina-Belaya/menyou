@@ -5,5 +5,6 @@ import { Component } from '@angular/core';
   imports: [],
   templateUrl: './chat-message.html',
   styleUrl: './chat-message.scss',
+  standalone: true
 })
 export class ChatMessage {}

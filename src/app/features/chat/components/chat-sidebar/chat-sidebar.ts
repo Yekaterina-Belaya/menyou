@@ -5,5 +5,6 @@ import { Component } from '@angular/core';
   imports: [],
   templateUrl: './chat-sidebar.html',
   styleUrl: './chat-sidebar.scss',
+  standalone: true
 })
 export class ChatSidebar {}

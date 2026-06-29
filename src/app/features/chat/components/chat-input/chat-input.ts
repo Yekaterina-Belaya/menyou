@@ -5,5 +5,6 @@ import { Component } from '@angular/core';
   imports: [],
   templateUrl: './chat-input.html',
   styleUrl: './chat-input.scss',
+  standalone: true
 })
 export class ChatInput {}
