@@ -5,5 +5,6 @@ import { Component } from '@angular/core';
   imports: [],
   templateUrl: './recipe-detail.html',
   styleUrl: './recipe-detail.scss',
+  standalone: true
 })
 export class RecipeDetail {}
