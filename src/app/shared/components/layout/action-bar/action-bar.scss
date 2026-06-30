@@ -1,0 +1,25 @@
+.action-buttons {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.notification-btn {
+  position: relative;
+}
+
+.notification-badge {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  font-size: 10px;
+  font-weight: 700;
+  background-color: var(--mat-sys-error, #ff5252);
+  color: white;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,5 +1,6 @@
 @use '@angular/material' as mat;
 @use '../src/styles/themes/theme' as theme;
+@use '../src/styles/vendors/material-override';
 
 // Подключение темы Material
 @include mat.core();
@@ -32,6 +33,7 @@ body {
   background-color: var(--mat-sys-surface);
   color: var(--mat-sys-on-surface);
   font: var(--mat-sys-body-medium);
+  font-family: 'Inter', sans-serif !important;
 
   // Reset the user agent margin.
   margin: 0;

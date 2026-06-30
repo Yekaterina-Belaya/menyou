@@ -46,15 +46,14 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  flex-grow: 1; // Занимает всё свободное пространство по центру
+  flex-grow: 1;
 
   .nav-item-btn {
-    justify-content: flex-start; // Выравниваем текст кнопок по левому краю
+    justify-content: flex-start;
     width: 100%;
     padding: 12px 16px;
     border-radius: 12px;
     font-size: 15px;
-    font-weight: 500;
     background-color: transparent;
     color: var(--mat-sys-on-background) !important;
   }
@@ -67,62 +66,6 @@
   gap: 16px;
   margin-top: auto;
   padding-top: 16px;
-
-  .action-buttons {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-
-    .notification-btn {
-      position: relative;
-    }
-
-    .notification-badge {
-      position: absolute;
-      top: 2px;
-      right: 2px;
-      font-size: 10px;
-      font-weight: 700;
-      background-color: var(--mat-sys-error, #ff5252);
-      color: white;
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-  }
-
-  .user-profile {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 8px;
-
-    .user-avatar {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      object-fit: cover;
-    }
-
-    .user-info {
-      display: flex;
-      flex-direction: column;
-
-      .user-name {
-        font-size: 15px;
-        font-weight: 600;
-        color: var(--mat-sys-on-surface);
-      }
-
-      .user-status {
-        font-size: 12px;
-        color: var(--mat-sys-primary);
-      }
-    }
-  }
 
   .profile-links {
     display: flex;
@@ -154,8 +97,6 @@
 
 /* ===== Адаптивность для мобильных (Прячем или трансформируем) ===== */
 @media (max-width: 992px) {
-  // На планшетах и телефонах сайдбар можно скрывать,
-  // накладывая бургер-меню (или вынести его вызов в корень приложения)
   .app-sidebar {
     transform: translateX(-100%);
     transition: transform 0.3s ease;

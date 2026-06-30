@@ -1,0 +1,54 @@
+<h2>Почему рецепт вам не подошел?</h2>
+
+<div class="reasons">
+
+  @for(reason of reasons; track reason){
+
+    <mat-checkbox
+      [checked]="selected().includes(reason)"
+      (change)="toggle(reason, $event.checked)">
+
+      {{ reason }}
+
+    </mat-checkbox>
+
+  }
+
+</div>
+
+@if(otherSelected()){
+
+  <mat-form-field appearance="outline" class="full-width">
+
+    <mat-label>Расскажите подробнее</mat-label>
+
+    <input
+      matInput
+      [ngModel]="customReason()"
+      (ngModelChange)="customReason.set($event)">
+
+  </mat-form-field>
+
+}
+
+<div class="actions">
+
+  <button
+    mat-stroked-button
+    (click)="skip()">
+
+    Skip
+
+  </button>
+
+  <button
+    mat-flat-button
+    color="primary"
+    (click)="save()"
+    [disabled]="selected().length === 0">
+
+    Save
+
+  </button>
+
+</div>

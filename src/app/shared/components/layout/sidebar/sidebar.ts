@@ -23,9 +23,7 @@ export class Sidebar implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
 
   navItems: NavItem[] = [
-    { path: '/', label: 'Главная', exact: true },
-    { path: '/recipes', label: 'Рецепты' },
-    { path: '/calculator', label: 'КБЖУ' },
+    { path: '/menu', label: 'Меню' },
     { path: '/blog', label: 'Блог' },
     { path: '/analytics', label: 'Аналитика' }
   ];

@@ -1,0 +1,114 @@
+<div class="recipe-dialog-container">
+
+  <div class="dialog-header">
+    <button mat-icon-button mat-dialog-close aria-label="Закрыть окно">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <mat-dialog-content class="dialog-scrollable-content">
+    <div class="recipe-layout">
+
+      <aside class="layout-left">
+        <section class="info-section">
+          <h4 class="section-title">Категории</h4>
+          <div class="tags-badge-list">
+            @for (tag of data.recipe.tags; track tag) {
+              <span class="custom-badge-tag">{{ tag }}</span>
+            }
+          </div>
+        </section>
+
+        <section class="info-section">
+          <h4 class="section-title">Нутриенты</h4>
+          <div class="nutrients-vertical-bar">
+            <div class="bar-item">
+              <span class="bar-label">Калорийность</span>
+              <span class="bar-value primary-text">{{ data.recipe.calories }} Ккал</span>
+            </div>
+            <div class="bar-item">
+              <span class="bar-label">Белки</span>
+              <span class="bar-value">{{ data.recipe.proteins }} г</span>
+            </div>
+            <div class="bar-item">
+              <span class="bar-label">Жиры</span>
+              <span class="bar-value">{{ data.recipe.fats }} г</span>
+            </div>
+            <div class="bar-item">
+              <span class="bar-label">Углеводы</span>
+              <span class="bar-value">{{ data.recipe.carbs }} г</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="info-section">
+          <h4 class="section-title">Полезные свойства</h4>
+          <ul class="benefits-list">
+            <li>Высокое содержание микроэлементов и витаминов.</li>
+            <li>Оптимальный баланс жирных кислот.</li>
+            <li>Легко усваивается организмом.</li>
+          </ul>
+        </section>
+      </aside>
+
+      <main class="layout-right">
+        <div class="dialog-image-wrapper">
+          <img [src]="data.recipe.imageUrl" [alt]="data.recipe.title" class="full-recipe-image" />
+        </div>
+
+        <h2 class="full-recipe-title">{{ data.recipe.title }}</h2>
+
+        <section class="recipe-details-section">
+          <h3 class="detail-subtitle"><mat-icon>shopping_basket</mat-icon> Ингредиенты</h3>
+          <ul class="ingredients-list">
+            <li>Основной продукт — 400г</li>
+            <li>Специи и зелень — по вкусу</li>
+            <li>Оливковое масло — 2 ст. л.</li>
+          </ul>
+        </section>
+
+        <section class="recipe-details-section">
+          <h3 class="detail-subtitle"><mat-icon>restaurant</mat-icon> Приготовление</h3>
+          <ol class="steps-list">
+            <li>Тщательно промойте и подготовьте все ингредиенты.</li>
+            <li>Разогрейте сковороду или духовой шкаф до требуемой температуры.</li>
+            <li>Соедините компоненты согласно пропорциям и доведите до готовности.</li>
+          </ol>
+        </section>
+      </main>
+
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end" class="dialog-fixed-footer">
+
+    <div class="footer-left-actions">
+      <button mat-icon-button [class.active-favorite]="isFavorite" (click)="toggleFavorite()" aria-label="В избранное">
+        <mat-icon>{{ isFavorite ? 'star' : 'star_border' }}</mat-icon>
+      </button>
+
+      <button mat-icon-button color="warn" (click)="onDislikeClick()" aria-label="Дизлайк">
+        <mat-icon>thumb_down_off_alt</mat-icon>
+      </button>
+    </div>
+
+    <div class="footer-right-actions">
+      <button mat-flat-button color="primary" [matMenuTriggerFor]="menuDropdown" class="add-to-menu-btn">
+        <span>Добавить в меню</span>
+        <mat-icon class="arrow-icon">expand_more</mat-icon>
+      </button>
+
+      <mat-menu #menuDropdown="matMenu" xPosition="before">
+        <button mat-menu-item (click)="addToMenu('today')">
+          <mat-icon>today</mat-icon>
+          <span>На сегодня</span>
+        </button>
+        <button mat-menu-item (click)="addToMenu('week')">
+          <mat-icon>date_range</mat-icon>
+          <span>На неделю</span>
+        </button>
+      </mat-menu>
+    </div>
+
+  </mat-dialog-actions>
+</div>

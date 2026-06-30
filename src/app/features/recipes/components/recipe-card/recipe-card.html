@@ -1,0 +1,39 @@
+<mat-card class="recipe-card">
+  <div class="card-image-wrapper">
+    <img [src]="recipe.imageUrl" [alt]="recipe.title" class="recipe-image" (click)="onCardClick()" />
+
+    <div class="card-actions-overlay">
+      <button mat-icon-button class="overlay-btn favorite-btn" [class.is-favorite]="isFavorite" (click)="toggleFavorite($event)" aria-label="Добавить в избранное">
+        <mat-icon>{{ isFavorite ? 'star' : 'star_border' }}</mat-icon>
+      </button>
+      <button mat-icon-button class="overlay-btn dislike-btn" (click)="onDislike($event.target.toString())" aria-label="Не нравится">
+        <mat-icon>thumb_down_off_alt</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <mat-card-content class="card-body" (click)="onCardClick()">
+    <h3 class="recipe-title">{{ recipe.title }}</h3>
+    <div class="tags-container">
+      @for (tag of recipe.tags; track tag) {
+        <span class="custom-tag">{{ tag }}</span>
+      }
+    </div>
+
+    <div class="nutrients-grid">
+      <div class="nutrient-item"><span class="value">{{ recipe.calories }}</span><span class="label">Ккал</span></div>
+      <div class="nutrient-item"><span class="value">{{ recipe.proteins }}г</span><span class="label">Б</span></div>
+      <div class="nutrient-item"><span class="value">{{ recipe.fats }}г</span><span class="label">Ж</span></div>
+      <div class="nutrient-item"><span class="value">{{ recipe.carbs }}г</span><span class="label">У</span></div>
+    </div>
+  </mat-card-content>
+
+  <mat-divider></mat-divider>
+
+  <mat-card-footer class="card-footer">
+    <p class="recipe-description" (click)="onCardClick()">{{ recipe.description }}</p>
+    <button mat-button color="primary" class="details-btn" (click)="onCardClick()">
+      Подробнее
+    </button>
+  </mat-card-footer>
+</mat-card>
