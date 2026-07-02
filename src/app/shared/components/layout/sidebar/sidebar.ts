@@ -24,6 +24,8 @@ export class Sidebar implements OnInit, OnDestroy {
 
   navItems: NavItem[] = [
     { path: '/menu', label: 'Меню' },
+    { path: '/favorites', label: 'Избранное' },
+    { path: '/recipes', label: 'Рецепты' },
     { path: '/blog', label: 'Блог' },
     { path: '/analytics', label: 'Аналитика' }
   ];

@@ -1,11 +1,12 @@
-import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
-import { Recipe } from '@shared/models/recipe';
+import { Component, inject, Input, input, output, signal } from '@angular/core';
+import { RecipeInterface } from '@shared/models/recipe.interface';
 import { MatIcon } from '@angular/material/icon';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatCard, MatCardContent, MatCardFooter } from '@angular/material/card';
-import { MatDivider } from '@angular/material/list';
 import { MatDialog } from '@angular/material/dialog';
 import { FeedbackDialog } from '../feedback-dialog/feedback-dialog';
+import { RecipeModal } from '@features/recipes/components/recipe-modal/recipe-modal';
+import { RecipeFavoriteService } from '@features/recipes/services/recipe-favorite.service';
 
 @Component({
   selector: 'app-recipe-card',
@@ -14,7 +15,6 @@ import { FeedbackDialog } from '../feedback-dialog/feedback-dialog';
     MatIconButton,
     MatCard,
     MatCardContent,
-    MatDivider,
     MatCardFooter,
     MatButton
   ],
@@ -23,33 +23,46 @@ import { FeedbackDialog } from '../feedback-dialog/feedback-dialog';
   standalone: true
 })
 export class RecipeCard {
-  @Input({ required: true }) recipe!: Recipe;
-  @Input({ required: true }) userId!: number;
-  @Output() openDetails = new EventEmitter<Recipe>();
-  @Output() dislike = new EventEmitter<Recipe>();
+  recipe = input.required<RecipeInterface>();
+  userId = input.required<number>();
+  dislike = output<RecipeInterface>()
 
   isFavorite = false;
 
+  private favoritesFacade = inject(RecipeFavoriteService)
   private dialog = inject(MatDialog);
 
+  openRecipeModal(recipe: RecipeInterface): void {
+    const dialogRef = this.dialog.open(RecipeModal, {
+      width: '850px',
+      maxWidth: '95vw',
+      data: { recipe: recipe },
+      panelClass: 'custom-recipe-dialog-panel'
+    });
 
-  toggleFavorite(event: Event): void {
-    event.stopPropagation(); // Чтобы не триггерить открытие модалки всего рецепта
-    this.isFavorite = !this.isFavorite;
+    dialogRef.afterClosed().subscribe(result => {
+      if (result?.action === 'dislike') {
+        this.openDislikeFeedbackModal();
+      }
+    });
   }
 
-  onCardClick(): void {
-    this.openDetails.emit(this.recipe);
+  openDislikeFeedbackModal(){
+    const dialogRef = this.dialog.open(FeedbackDialog)
+    dialogRef.afterClosed().subscribe()
   }
 
   onDislike(recipeId: string) {
-
     this.dialog.open(FeedbackDialog, {
-      // width: '500px',
-      // data: {
-      //   userId: this.userId
-      // }
+      width: '500px',
+      data: {
+        userId: this.userId,
+        recipeId: recipeId
+      }
     });
+  }
 
+  toggleFavorite(id: number) {
+    this.favoritesFacade.toggleFavorite(id)
   }
 }

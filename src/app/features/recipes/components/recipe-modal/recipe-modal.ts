@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, inject, Inject } from '@angular/core';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import {
@@ -9,10 +9,11 @@ import {
   MatDialogRef
 } from '@angular/material/dialog';
 import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
-import { Recipe } from '@shared/models/recipe';
+import { RecipeInterface } from '@shared/models/recipe.interface';
+import { RecipeFavoriteService } from '@features/recipes/services/recipe-favorite.service';
 
 export interface RecipeDialogData {
-  recipe: Recipe;
+  recipe: RecipeInterface;
 }
 
 @Component({
@@ -37,22 +38,21 @@ export class RecipeModal {
 
   constructor(
     public dialogRef: MatDialogRef<RecipeModal>,
+    private facade: RecipeFavoriteService,
     @Inject(MAT_DIALOG_DATA) public data: RecipeDialogData
   ) {}
 
-  toggleFavorite(): void {
+  toggleFavorite(id: number): void {
+    this.facade.toggleFavorite(id);
     this.isFavorite = !this.isFavorite;
   }
 
   onDislikeClick(): void {
-    // Закрываем модалку рецепта и передаем статус 'dislike',
-    // чтобы родительский компонент открыл вторую модалку отзывов
     this.dialogRef.close({ action: 'dislike', recipe: this.data.recipe });
   }
 
   addToMenu(period: 'today' | 'week'): void {
     console.log(`Рецепт добавлен в меню на период: ${period}`);
-    // Здесь будет вызов метода вашего MenuService
     this.dialogRef.close({ action: 'addToMenu', period: period, recipe: this.data.recipe });
   }
 }

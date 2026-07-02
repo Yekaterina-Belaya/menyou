@@ -8,7 +8,30 @@
 
   <mat-dialog-content class="dialog-scrollable-content">
     <div class="recipe-layout">
+      <main class="layout-right">
 
+        <h2 class="full-recipe-title">{{ data.recipe.title }}</h2>
+        <div class="dialog-image-wrapper">
+          <img [src]="data.recipe.imageUrl" [alt]="data.recipe.title" class="full-recipe-image" />
+        </div>
+        <section class="recipe-details-section">
+          <h3 class="detail-subtitle"><mat-icon>shopping_basket</mat-icon> Ингредиенты</h3>
+          <ul class="ingredients-list">
+            @for(ingredient of data.recipe.ingredients; track ingredient.title) {
+              <li>{{ingredient.title}} —  {{ingredient.quantity}}{{ingredient.measures}}</li>
+            }
+          </ul>
+        </section>
+
+        <section class="recipe-details-section">
+          <h3 class="detail-subtitle"><mat-icon>restaurant</mat-icon> Приготовление</h3>
+          <ol class="steps-list">
+            @for(step of data.recipe.process; track step){
+              <li>{{step}}</li>
+            }
+          </ol>
+        </section>
+      </main>
       <aside class="layout-left">
         <section class="info-section">
           <h4 class="section-title">Категории</h4>
@@ -44,46 +67,19 @@
         <section class="info-section">
           <h4 class="section-title">Полезные свойства</h4>
           <ul class="benefits-list">
-            <li>Высокое содержание микроэлементов и витаминов.</li>
-            <li>Оптимальный баланс жирных кислот.</li>
-            <li>Легко усваивается организмом.</li>
+            @for(benefit of data.recipe.benefits; track benefit){
+              <li>{{benefit}}</li>
+            }
           </ul>
         </section>
       </aside>
-
-      <main class="layout-right">
-        <div class="dialog-image-wrapper">
-          <img [src]="data.recipe.imageUrl" [alt]="data.recipe.title" class="full-recipe-image" />
-        </div>
-
-        <h2 class="full-recipe-title">{{ data.recipe.title }}</h2>
-
-        <section class="recipe-details-section">
-          <h3 class="detail-subtitle"><mat-icon>shopping_basket</mat-icon> Ингредиенты</h3>
-          <ul class="ingredients-list">
-            <li>Основной продукт — 400г</li>
-            <li>Специи и зелень — по вкусу</li>
-            <li>Оливковое масло — 2 ст. л.</li>
-          </ul>
-        </section>
-
-        <section class="recipe-details-section">
-          <h3 class="detail-subtitle"><mat-icon>restaurant</mat-icon> Приготовление</h3>
-          <ol class="steps-list">
-            <li>Тщательно промойте и подготовьте все ингредиенты.</li>
-            <li>Разогрейте сковороду или духовой шкаф до требуемой температуры.</li>
-            <li>Соедините компоненты согласно пропорциям и доведите до готовности.</li>
-          </ol>
-        </section>
-      </main>
-
     </div>
   </mat-dialog-content>
 
   <mat-dialog-actions align="end" class="dialog-fixed-footer">
 
     <div class="footer-left-actions">
-      <button mat-icon-button [class.active-favorite]="isFavorite" (click)="toggleFavorite()" aria-label="В избранное">
+      <button mat-icon-button [class.active-favorite]="isFavorite" (click)="toggleFavorite(data.recipe.id)" aria-label="В избранное">
         <mat-icon>{{ isFavorite ? 'star' : 'star_border' }}</mat-icon>
       </button>
 
